@@ -11,9 +11,9 @@ El juego se desarrolla en un plano cartesíano, donde se establece una ruta para
 # Consideraciones
 El programa solo corre en la consola y esta hecho con c++ standard por lo que corre en todos los sistemas operativos
 
-compilar con: "g++ empleado.h empresa.h main.cpp"
+compilar con: "g++ Enemigo.h Torre.h Mapa.h y defensaArcaica.cpp"
 
-correr en linux: "/a.out"
+correr en linux: "/defensaArcaica.out"
 
-correr en windows: "a.exe"
+correr en windows: "defensaArcaica.exe"
 
