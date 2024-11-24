@@ -1,0 +1,5 @@
+Cambios hechos en el proyecto:
+
+Cambie todos los archivos que estaban en terminación .gch, por su versión .h
+
+Gracias
