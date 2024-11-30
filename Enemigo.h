@@ -5,11 +5,13 @@
 #include <string>
 #include <utility> // Para la posición en dos dimensiones
 
+using namespace std;
+
 class Enemigo {
-private:
+protected:
     float vida;
     float velocidad;
-    std::pair<float, float> posicion; // Posición en dos dimensiones (eje x, eje y)
+    pair<float, float> posicion; // Posición en dos dimensiones (eje x, eje y)
 
 public:
     // Constructor por defecto
@@ -25,17 +27,21 @@ public:
         velocidad = _velocidad;
         posicion = {_posicion_x, _posicion_y};
     }
+    
+    virtual ~Enemigo(){
+    	
+	}
 
     // Getters
-    float getVida() const {
+    float get_vida() const {
         return vida;
     }
 
-    float getVelocidad() const {
+    float get_velocidad() const {
         return velocidad;
     }
 
-    std::pair<float, float> getPosicion() const {
+    pair<float, float> get_posicion() const {
         return posicion;
     }
 
@@ -53,13 +59,14 @@ public:
     }
     
     //Metodos
-    void mover(){
+    virtual void mover(){
     	posicion.first += velocidad;
 	}
-	void imprimeDatos() const{
-		std::cout << "Vida: "<< vida << std::endl;
-		std::cout << "Velocidad: " << velocidad << std::endl;
-		std::cout <<"Posicion (" << posicion.first << "," << posicion.second << ")"<< std::endl;
+	
+	virtual void imprimeDatos() const{
+		cout << "Vida: "<< vida << endl;
+		cout << "Velocidad: " << velocidad << endl;
+		cout <<"Posicion (" << posicion.first << "," << posicion.second << ")"<< endl;
 	}
 };
 #endif
