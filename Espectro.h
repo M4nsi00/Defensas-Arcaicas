@@ -39,8 +39,8 @@ class Espectro : public Enemigo{
 		
 		void mover() override {  // Sobreescribir el método de movimiento
         if (tiempo_invisible > 0) {
-            cout << "Espectro invisible, no se mueve." << std::endl;
-            tiempo_invisible--;
+            cout << "Espectro invisible, no se mueve." << endl;
+    		tiempo_invisible;
         } else {
             Enemigo::mover();
         }
