@@ -1,29 +1,35 @@
 #include "Mapa.h"
-#include "Torre.h"
-#include "Enemigo.h"
+#include "Congelador.h"
+#include "Explosiva.h"
+#include "Tanque.h"
+#include "Espectro.h"
 
 int main() {
-    // Crear enemigos y torres
-    Enemigo enemigo1(100, 1.0, 2, 3);
-    Enemigo enemigo2(50, 1.5, 5, 5);
+    // Crear instancias de torres y enemigos
+    Torre* torre1 = new Congelador(5, 10, 50, 20, 100, 0, 0);
+    Torre* torre2 = new Explosiva(30.0, 3.0, 60, 15, 150, 2, 2);
 
-    Torre torre1(20, 4, 50, 0, 0);
-    Torre torre2(15, 6, 40, 3, 3);
+    Enemigo* enemigo1 = new Tanque(50, 100, 1, 10, 10);
+    Enemigo* enemigo2 = new Espectro(50, 100, 1, 12, 12);
 
     // Crear el mapa
     Mapa mapa;
 
-    // Usar los setters para agregar torres y enemigos
-    mapa.setEnemigo(enemigo1);
-    mapa.setEnemigo(enemigo2);
-    mapa.setTorre(torre1);
-    mapa.setTorre(torre2);
+    // Agregar las torres y enemigos al mapa
+    mapa.agregarTorre(torre1);
+    mapa.agregarTorre(torre2);
+    mapa.agregarEnemigo(enemigo1);
+    mapa.agregarEnemigo(enemigo2);
 
-    // Imprimir el mapa antes de atacar
+    // Imprimir el estado inicial del mapa
     mapa.imprimirMapa();
 
-    // Hacer que las torres ataquen
+    // Realizar ataques
     mapa.ataqueTorre();
+
+    // Imprimir el estado final del mapa
+    mapa.imprimirMapa();
 
     return 0;
 }
+
