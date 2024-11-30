@@ -1,5 +1,7 @@
 Cambios hechos en el proyecto:
 
 Cambie todos los archivos que estaban en terminación .gch, por su versión .h
+Cambie el algoritmo por falta de algunos métodos creados y para mejorar la relacion entre el algoritmo y el codigo
+Actualice todas las clases para darles más formato, hacer algunos ajustes en algunas clases y para darle un estandar de codificacion.
 
 Gracias
