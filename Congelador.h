@@ -26,22 +26,30 @@ class Congelador : public Torre{
 			tiempo = _tiempo;
 		}
 		
-		 // Método de ataque
-	    void atacarEnemigos(std::vector<Enemigo>& enemigos){
-	    	for (size_t i = 0; i < enemigos.size(); ++i) {
-   			float distancia = sqrt(pow(posicion.first - enemigos[i].getPosicion().first, 2) + pow(posicion.second - enemigos[i].getPosicion().second, 2));
-    		if (distancia <= alcance) {
-        		enemigos[i].set_velocidad(std::max(0.0f, enemigos[i].getVelocidad() - realentizar));
-        		std::cout << "Enemigo ralentizado! Velocidad restante: " << enemigos[i].getVelocidad()<< " por " << tiempo << " segundos." << std::endl;
-    		}
+		 // Método de realentizar al enemigo
+		 void realentizarEnemigo(Enemigo& enemigo) {
+    		enemigo.set_velocidad(max(0.0f, enemigo.get_velocidad() - realentizar));
+    		cout << "Enemigo ralentizado! Velocidad restante: " << enemigo.get_velocidad()<< " por " << tiempo << " segundos." << endl;
 		}
-	}
+		
+		//Metodo que ataca al enemigo y tambien usa la funcion realentizarEnemigo para aplicar el efecto de la torre 
+	    void atacarEnemigos(vector<Enemigo>& enemigos) {
+    	for (size_t i = 0; i < enemigos.size(); ++i) {
+        float distancia = sqrt(pow(posicion.first - enemigos[i].get_posicion().first, 2) + pow(posicion.second - enemigos[i].get_posicion().second, 2)
+        );
+
+        if (distancia <= alcance) {
+            // Usa el método `realentizarEnemigo` para aplicar el efecto
+            realentizarEnemigo(enemigos[i]);
+        }
+    }
+}
 	
-	    // Imprime datos específicos
+	    // Imprime datos de la torre
 	    void imprimeDatos() const {
 	        cout << "---- Torre congeladora ----" << endl;
 			Torre::imprimeDatos();
-	        std::cout << "Realentizar: " << realentizar << ", Tiempo: " << tiempo << " segundos" << std::endl;
+	        cout << "Realentizar: " << realentizar << ", Tiempo: " << tiempo << " segundos" << endl;
 	    }
 	
 };
