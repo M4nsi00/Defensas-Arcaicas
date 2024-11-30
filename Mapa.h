@@ -1,56 +1,75 @@
 #ifndef MAPA_H
 #define MAPA_H
+
 #include "Torre.h"
 #include "Enemigo.h"
-#include <iostream>
 #include <vector>
+#include <iostream>
+
+using namespace std;
 
 class Mapa {
 private:
-    std::vector<Torre> torres;
-    std::vector<Enemigo> enemigos;
+    vector<Torre*> torres;     // Lista de punteros a Torres
+    vector<Enemigo*> enemigos; // Lista de punteros a Enemigos
 
 public:
-    // Getters
-    const std::vector<Torre>& getTorres() const {
-        return torres;
+    // Agregar torres y enemigos
+    void agregarTorre(Torre* torre) {
+        torres.push_back(torre);
     }
 
-    const std::vector<Enemigo>& getEnemigos() const {
-        return enemigos;
+    void agregarEnemigo(Enemigo* enemigo) {
+        enemigos.push_back(enemigo);
     }
 
-    // Setters
-    void setTorre(const Torre& _torre) {
-        torres.push_back(_torre);
+    // Imprimir el estado del mapa
+    void imprimirMapa() const {
+        cout << "---- Torres ----" << endl;
+        for (size_t i = 0; i < torres.size(); ++i) {
+            torres[i]->imprimeDatos(); // Llama a imprimeDatos de Torre
+        }
+
+        cout << "---- Enemigos ----" << endl;
+        for (size_t i = 0; i < enemigos.size(); ++i) {
+            cout << "Vida del enemigo: " << enemigos[i]->get_vida() << endl;
+        }
     }
 
-    void setEnemigo(const Enemigo& _enemigo) {
-        enemigos.push_back(_enemigo);
+    // Hacer que las torres ataquen a los enemigos
+    void ataqueTorre() {
+        for (size_t i = 0; i < torres.size(); ++i) {
+            for (size_t j = 0; j < enemigos.size(); ++j) {
+                torres[i]->atacar(*enemigos[j]); // Ataca al enemigo
+                if (enemigos[j]->get_vida() <= 0) {
+                    cout << "Enemigo eliminado.\n";
+                }
+            }
+        }
+
+        // Eliminar enemigos con vida <= 0
+        for (size_t i = 0; i < enemigos.size(); /* No incrementamos aquí */) {
+            if (enemigos[i]->get_vida() <= 0) {
+                delete enemigos[i];                  // Libera memoria del enemigo eliminado
+                enemigos.erase(enemigos.begin() + i); // Borra el puntero del vector
+            } else {
+                ++i; // Incrementa solo si no se borró nada
+            }
+        }
     }
 
-    // Métodos
-    // Imprimir el mapa	
-	void imprimirMapa() const {
-    std::cout << "---- Torre ----" << std::endl;
-    for (size_t i = 0; i < torres.size(); ++i) {
-        torres[i].imprimeDatos();
-    }
-    std::cout << "---- Enemigo ----" << std::endl;
-    for (size_t i = 0; i < enemigos.size(); ++i) {
-        enemigos[i].imprimeDatos();
-    }
-	}
+    // Destructor para limpiar memoria
+    ~Mapa() {
+        for (size_t i = 0; i < torres.size(); ++i) {
+            delete torres[i]; // Libera memoria de las torres
+        }
 
-// Hacer que la Torre ataque
-void ataqueTorre() {
-    for (size_t i = 0; i < torres.size(); ++i) {
-        for (size_t j = 0; j < enemigos.size(); ++j) {
-            torres[i].atacar(enemigos[j]);
-        	}
-    	}
-	}
+        for (size_t i = 0; i < enemigos.size(); ++i) {
+            delete enemigos[i]; // Libera memoria de los enemigos
+        }
+    }
 };
 
 #endif
+
 
