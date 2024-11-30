@@ -4,6 +4,8 @@
 #include "Enemigo.h"
 #include <iostream>
 
+using namespace std;
+
 class Tanque : public Enemigo {
 private:
     int escudo;  // Vida del escudo
@@ -20,12 +22,12 @@ public:
 	}
 
     // Getter del escudo
-    int getEscudo() const {
+    int get_escudo() const {
         return escudo;
     }
 
     // Setter del escudo
-    void setEscudo(int _escudo) {
+    void set_escudo(int _escudo) {
         escudo = _escudo;
     }
 
@@ -34,16 +36,20 @@ public:
         escudo -= cantidad;  // Reducir el escudo por la cantidad especificada
         if (escudo <= 0) {
             escudo = 0;  // Asegurarse de que el escudo no sea negativo
-            std::cout << "El escudo del tanque ha sido destruido!" << std::endl;
+            cout << "El escudo del tanque ha sido destruido!" << endl;
         } else {
-            std::cout << "El tanque aún tiene " << escudo << " puntos de escudo." << std::endl;
+            cout << "El tanque aún tiene " << escudo << " puntos de escudo." << endl;
         }
     }
     
+    void mover() override {  // Sobreescribir el método de movimiento
+            Enemigo::mover();
+        }
+    
     void imprimeDatos(){
-			std::cout << "---- Enemigo Tanque ----" << std::endl;
+			cout << "---- Enemigo Tanque ----" << endl;
 			Enemigo::imprimeDatos();
-			std::cout << "Duración del escudo: " << escudo << std::endl;
+			cout << "Duración del escudo: " << escudo << endl;
 		}
     
 };
